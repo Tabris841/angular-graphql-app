@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>
+        <span *ngIf="selectedStudent.id; else prompt">Editing {{originalName}}</span>
+        <ng-template #prompt>Create</ng-template>
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <form (submit)="saved.emit(selectedStudent)">
+    <mat-card-content>
+      <mat-input-container class="full-width">
+        <input matInput placeholder="First Name" [(ngModel)]="selectedStudent.firstName" type="text" name="firstName">
+      </mat-input-container>
+      <mat-input-container class="full-width">
+        <input matInput placeholder="Last Name" [(ngModel)]="selectedStudent.lastName" type="text" name="lastName">
+      </mat-input-container>
+      <div class="full-width">
+        <mat-checkbox [(ngModel)]="selectedStudent.active" name="active">Active</mat-checkbox>
+      </div>
+      <div class="full-width" *ngIf="selectedStudent.id">
+        <h3>Enrolled Courses</h3>
+        <mat-list>
+          <mat-list-item *ngFor="let course of selectedStudent.courses">
+            <mat-checkbox [(ngModel)]="course.enrolled" name="{{course.id}}">{{course.name}}</mat-checkbox>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button>Save</button>
+      <button type="button" mat-button (click)="cancelled.emit(selectedStudent)">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

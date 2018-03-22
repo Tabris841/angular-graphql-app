@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Students</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let student of students" (click)="selected.emit(student)">
+        <h3 mat-line>{{student.firstName}} {{student.lastName}}</h3>
+        <button *ngIf="!readonly" mat-icon-button (click)="deleted.emit(student);$event.stopImmediatePropagation();">
+          <mat-icon>close</mat-icon>
+        </button>
+        <p mat-line>
+          <strong>Is Active?</strong> {{student.active}}
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
