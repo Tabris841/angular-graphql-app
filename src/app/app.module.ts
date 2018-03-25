@@ -13,7 +13,8 @@ import { AppMaterialModule } from './app-material.module';
 import {
   CoursesService,
   NotificationsService,
-  StudentsService
+  StudentsService,
+  UsersService
 } from './shared';
 
 import { AppComponent } from './app.component';
@@ -50,7 +51,12 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     ApolloModule,
     HttpLinkModule // makes it easy to fetch data in Angular
   ],
-  providers: [CoursesService, NotificationsService, StudentsService],
+  providers: [
+    CoursesService,
+    NotificationsService,
+    StudentsService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

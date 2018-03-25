@@ -4,6 +4,7 @@ import { ROUTER_ANIMATION } from './router-animations';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { NotificationsService } from './shared/notifications.service';
 import { LoginComponentComponent } from './login-component/login-component.component';
+import { UsersService } from './shared';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
   constructor(
     private snackbar: MatSnackBar,
     public dialog: MatDialog,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private usersServices: UsersService
   ) {}
 
   ngOnInit() {
@@ -44,11 +46,28 @@ export class AppComponent implements OnInit {
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponentComponent, {
       width: '400px',
-      data: {}
+      data: {
+        buttonName: 'Login'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+  openCreateUser() {
+    const dialogRef = this.dialog.open(LoginComponentComponent, {
+      width: '400px',
+      data: {
+        buttonName: 'Create'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.usersServices.create(result).subscribe(data => {
+        console.log(data);
+      });
     });
   }
 }

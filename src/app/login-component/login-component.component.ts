@@ -32,6 +32,10 @@ export class LoginComponentComponent implements OnInit {
 
   onFormSubmit() {
     if (this.loginForm.valid) {
+      this.dialogRef.close({
+        username: this.loginForm.controls.username.value,
+        password: this.loginForm.controls.password.value
+      });
     } else {
       this.validateAllFormFields(this.loginForm);
     }
