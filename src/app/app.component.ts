@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ROUTER_ANIMATION } from './router-animations';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { NotificationsService } from './shared/notifications.service';
+import { LoginComponentComponent } from './login-component/login-component.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private snackbar: MatSnackBar,
+    public dialog: MatDialog,
     private ns: NotificationsService
   ) {}
 
@@ -37,5 +39,16 @@ export class AppComponent implements OnInit {
 
   prepareRouterState(router: RouterOutlet) {
     return router.activatedRouteData['animation'] || 'initial';
+  }
+
+  openLogin() {
+    const dialogRef = this.dialog.open(LoginComponentComponent, {
+      width: '400px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

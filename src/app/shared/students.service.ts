@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs/operators';
 
 const fragments = {
   courses: gql`
-    fragment courseFields on CourseType {
+    fragment courseFields on Course {
       id
       name
       description

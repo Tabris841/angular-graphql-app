@@ -24,6 +24,7 @@ import { StudentsListComponent } from './students/students-list/students-list.co
 import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
+import { LoginComponentComponent } from './login-component/login-component.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,10 @@ import { CoursesListComponent } from './courses/courses-list/courses-list.compon
     StudentsListComponent,
     CoursesComponent,
     CourseDetailsComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    LoginComponentComponent
   ],
+  entryComponents: [LoginComponentComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -53,7 +56,7 @@ import { CoursesListComponent } from './courses/courses-list/courses-list.compon
 export class AppModule {
   constructor(apollo: Apollo, httpLink: HttpLink) {
     apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:8080/graphql' }),
+      link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
       cache: new InMemoryCache()
     });
   }

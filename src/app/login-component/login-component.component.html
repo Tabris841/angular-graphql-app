@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Login</h2>
+<mat-dialog-content>
+  <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Enter your username" formControlName="username" required>
+      <mat-error *ngIf="isFieldValid('username')">You must enter a value</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'"
+        required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="isFieldValid('password')">You must enter a value</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close type="button">Cancel</button>
+  <button mat-button type="submit" (click)="onFormSubmit()">Login</button>
+</mat-dialog-actions>
