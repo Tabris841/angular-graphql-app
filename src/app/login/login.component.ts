@@ -3,16 +3,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-login-component',
-  templateUrl: './login-component.component.html',
-  styleUrls: ['./login-component.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponentComponent implements OnInit {
+export class LoginComponent implements OnInit {
   hide = true;
   loginForm: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<LoginComponentComponent>,
+    public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -26,7 +26,7 @@ export class LoginComponentComponent implements OnInit {
     );
   }
 
-  onNoClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 

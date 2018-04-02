@@ -25,7 +25,7 @@ import { StudentsListComponent } from './students/students-list/students-list.co
 import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
-import { LoginComponentComponent } from './login-component/login-component.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     CoursesComponent,
     CourseDetailsComponent,
     CoursesListComponent,
-    LoginComponentComponent
+    LoginComponent
   ],
-  entryComponents: [LoginComponentComponent],
+  entryComponents: [LoginComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

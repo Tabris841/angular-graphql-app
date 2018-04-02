@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Student } from './student.model';
-import { Course } from './course.model';
-import { CoursesService } from './courses.service';
-
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { switchMap } from 'rxjs/operators';
+
+import { Student } from './student.model';
+import { Course } from './course.model';
+import { CoursesService } from './courses.service';
 
 const fragments = {
   courses: gql`
@@ -34,18 +34,8 @@ const AllStudentsQuery = gql`
 `;
 
 const CreateStudentMutation = gql`
-  mutation(
-    $firstName: String!
-    $lastName: String!
-    $active: Boolean!
-    $coursesIds: [ID!]!
-  ) {
-    createStudent(
-      firstName: $firstName
-      lastName: $lastName
-      active: $active
-      coursesIds: $coursesIds
-    ) {
+  mutation CreateStudent($input: CreateStudent!) {
+    createStudent(input: $input) {
       id
       firstName
       lastName
@@ -55,20 +45,8 @@ const CreateStudentMutation = gql`
 `;
 
 const UpdateStudentMutation = gql`
-  mutation(
-    $id: ID!
-    $firstName: String!
-    $lastName: String!
-    $active: Boolean!
-    $coursesIds: [ID!]!
-  ) {
-    updateStudent(
-      id: $id
-      firstName: $firstName
-      lastName: $lastName
-      active: $active
-      coursesIds: $coursesIds
-    ) {
+  mutation UpdateStudent($input: UpdateStudent!) {
+    updateStudent(input: $input) {
       id
       firstName
       lastName

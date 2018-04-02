@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ROUTER_ANIMATION } from './router-animations';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { NotificationsService } from './shared/notifications.service';
-import { LoginComponentComponent } from './login-component/login-component.component';
+import { LoginComponent } from './login/login.component';
 import { UsersService } from './shared';
 
 @Component({
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   openLogin() {
-    const dialogRef = this.dialog.open(LoginComponentComponent, {
+    const dialogRef = this.dialog.open(LoginComponent, {
       width: '400px',
       data: {
         buttonName: 'Login'
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   openCreateUser() {
-    const dialogRef = this.dialog.open(LoginComponentComponent, {
+    const dialogRef = this.dialog.open(LoginComponent, {
       width: '400px',
       data: {
         buttonName: 'Create'
