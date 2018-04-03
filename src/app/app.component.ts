@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ROUTER_ANIMATION } from './router-animations';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { NotificationsService } from './shared/notifications.service';
+
 import { LoginComponent } from './login/login.component';
-import { UsersService } from './shared';
+import { NotificationsService, UsersService, AuthService } from './shared';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
     private snackbar: MatSnackBar,
     public dialog: MatDialog,
     private ns: NotificationsService,
-    private usersServices: UsersService
+    private usersService: UsersService,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -52,7 +53,7 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      this.authService.login(result);
     });
   }
 
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.usersServices.create(result).subscribe(data => {
+      this.usersService.create(result).subscribe(data => {
         console.log(data);
       });
     });

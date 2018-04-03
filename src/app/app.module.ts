@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -14,7 +14,8 @@ import {
   CoursesService,
   NotificationsService,
   StudentsService,
-  UsersService
+  UsersService,
+  TokenInterceptor
 } from './shared';
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { CourseDetailsComponent } from './courses/course-details/course-details.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './shared/auth.service';
 
 @NgModule({
   declarations: [
@@ -49,13 +51,19 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     AppMaterialModule,
     ApolloModule,
-    HttpLinkModule // makes it easy to fetch data in Angular
+    HttpLinkModule, // makes it easy to fetch data in Angular
   ],
   providers: [
     CoursesService,
     NotificationsService,
     StudentsService,
-    UsersService
+    UsersService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -4,8 +4,9 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { User } from './user.model';
+import { NotificationsService } from './notifications.service';
+import { AuthService } from './auth.service';
 
-const serverUrl = 'http://localhost:3000';
 
 const CreateUserMutation = gql`
   mutation($input: CreateUser!) {
@@ -18,8 +19,14 @@ const CreateUserMutation = gql`
 
 @Injectable()
 export class UsersService {
-  constructor(private apollo: Apollo, private http: HttpClient) {
-  }
+  private username: string;
+
+  constructor(
+    private apollo: Apollo,
+    private http: HttpClient,
+    private ns: NotificationsService,
+    private authService: AuthService
+  ) {}
 
   create(user: User) {
     return this.apollo.mutate({
@@ -31,9 +38,5 @@ export class UsersService {
         }
       }
     });
-  }
-
-  login(user: User) {
-    return this.http.post<User>(`${serverUrl}/signin`, user);
   }
 }
