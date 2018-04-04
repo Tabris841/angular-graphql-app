@@ -32,6 +32,13 @@ export class AppComponent implements OnInit {
     this.ns.notifications$.subscribe(notification =>
       this.showNotification(notification)
     );
+    this.authService.usernameChange$.subscribe((value: string) => {
+      if (value) {
+        this.links.push({ path: '/users', icon: 'supervisor_account', label: 'Users' });
+      } else {
+        this.links = this.links.filter(e => e.label !== 'Users');
+      }
+    });
   }
 
   showNotification(notification) {

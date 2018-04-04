@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { User } from './user.model';
-import { NotificationsService } from './notifications.service';
-import { AuthService } from './auth.service';
-
 
 const CreateUserMutation = gql`
   mutation($input: CreateUser!) {
@@ -17,16 +13,30 @@ const CreateUserMutation = gql`
   }
 `;
 
+const AllUsersQuery = gql`
+  query AllUsers {
+    allUsers {
+      id
+      username
+    }
+  }
+`;
+
+interface QueryResponse {
+  allUsers;
+}
+
 @Injectable()
 export class UsersService {
-  private username: string;
+  constructor(private apollo: Apollo) {}
 
-  constructor(
-    private apollo: Apollo,
-    private http: HttpClient,
-    private ns: NotificationsService,
-    private authService: AuthService
-  ) {}
+  all() {
+    return this.apollo
+      .watchQuery<QueryResponse>({
+        query: AllUsersQuery
+      })
+      .valueChanges.map(({ data }) => data.allUsers);
+  }
 
   create(user: User) {
     return this.apollo.mutate({

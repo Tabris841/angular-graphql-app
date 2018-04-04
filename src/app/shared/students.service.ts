@@ -19,7 +19,7 @@ const fragments = {
 };
 
 const AllStudentsQuery = gql`
-  query allStudents {
+  query AllStudents {
     allStudents {
       id
       firstName

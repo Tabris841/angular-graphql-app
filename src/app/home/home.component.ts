@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../shared/courses.service';
-import { StudentsService } from '../shared/students.service';
-import { Course } from '../shared/course.model';
-import { Student } from '../shared/student.model';
+
+import { Student, Course, StudentsService, CoursesService } from '../shared';
 
 @Component({
   selector: 'app-home',

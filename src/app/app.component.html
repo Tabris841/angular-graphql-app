@@ -13,7 +13,13 @@
     <button mat-button (click)="openLogin()">Login</button>
   </ng-template>
   <ng-template #username>
-    <div>{{authService.username}}</div>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+      {{authService.username}}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="authService.logout()">Logout</button>
+    </mat-menu>
   </ng-template>
 
 </mat-toolbar>

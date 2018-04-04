@@ -28,6 +28,8 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './shared/auth.service';
+import { UsersComponent } from './users/users.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AuthService } from './shared/auth.service';
     CoursesComponent,
     CourseDetailsComponent,
     CoursesListComponent,
-    LoginComponent
+    LoginComponent,
+    UsersComponent,
+    UsersListComponent
   ],
   entryComponents: [LoginComponent],
   imports: [
